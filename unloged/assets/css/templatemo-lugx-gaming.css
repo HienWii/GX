@@ -451,10 +451,39 @@ Header Style
   letter-spacing: 0.25px;
 }
 
+.header-area .main-nav .nav li button {
+  display: block;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  font-weight: 300;
+  font-size: 15px;
+  height: 40px;
+  line-height: 40px;
+  text-transform: capitalize;
+  color: #fff;
+  -webkit-transition: all 0.4s ease 0s;
+  -moz-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+  border: transparent;
+  letter-spacing: 0.25px;
+}
+
 .header-area .main-nav .nav li a {
   background-color: #ee626b;
   text-transform: uppercase;
   font-weight: 500;
+  
+}
+
+.header-area .main-nav .nav li button {
+  background-color: #ee626b;
+  text-transform: uppercase;
+  font-weight: 500;
+  width: 120px;
+  color: white;
+  
 }
 
 .header-area .main-nav .nav li:hover a {

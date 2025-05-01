@@ -3,7 +3,7 @@ import {
   addDoc,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-import { db } from "./config.js";
+import { db } from "../unloged/app-js/config.js";
 const productPrice = document.querySelector(".product-price");
 const productName = document.querySelector(".product-name");
 const description = document.querySelector(".description");

@@ -15,12 +15,14 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css" />
     <link rel="stylesheet" href="assets/css/templatemo-lugx-gaming.css" />
     <link rel="stylesheet" href="assets/css/owl.css" />
     <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="./assets/css/dropdown.css">
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
@@ -63,8 +65,18 @@
                 <li><a href="shop.html" class="active">Our Shop</a></li>
                 <li><a href="product-details.html">Product Details</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="sign-up.html">Sign Up</a></li>
-                <li><a href="log-in.html">Log In</a></li>
+                <li><div class="profile-container">
+                  <button class="profile-button" onclick="toggleDropdown()">
+                    <i class="bi bi-person-fill"></i>
+                  </button>
+                  <div class="dropdown" id="profileDropdown">
+                    <div class="user-info">
+                      <!-- <p>John Doe</p>
+                      <small>johndoe@example.com</small> -->
+                    </div>
+                  </div>
+                </div></li>
+                
               </ul>
               <a class="menu-trigger">
                 <span>Menu</span>
@@ -109,6 +121,9 @@
     </footer>
 
     <!-- Scripts -->
+    <script type="module" src="./app-js/shop.js"></script>
+    <script type="module" src="./app-js/view.js"></script>
+    <script src="./app-js/dropdown.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -116,6 +131,6 @@
     <script src="assets/js/owl-carousel.js"></script>
     <script src="assets/js/counter.js"></script>
     <script src="assets/js/custom.js"></script>
-    <script type="module" src="./app-js/shop.js"></script>
   </body>
 </html>
+
