@@ -17,19 +17,15 @@ loadTrendingSnapshot.forEach((doc) => {
             <div class="col-lg-3 col-md-6">
             <div class="item">
               <div class="thumb">
-                <a href="product-details.html"
-                  ><img src="${doc.data().image}" alt=""
-                /></a>
+                  <img src="${doc.data().image}" alt=""</>
                 <span class="price">
-                <em>${doc.data().price}</em>
-                ${doc.data().sale}</span>
+                ${doc.data().price}
+                </span>
               </div>
               <div class="down-content">
-                <span class="category">${doc.data().category}</span>
+                <span class="category">${doc.data().gerne1}</span>
                 <h4>${doc.data().name}</h4>
-                <a href="product-details.html"
-                  ><i class="fa fa-shopping-bag"></i
-                ></a>
+                <button onclick="openModal()"><i class="fa fa-shopping-bag"></i></button>
               </div>
             </div>
           </div>
@@ -41,16 +37,12 @@ loadMostPlayedSnapshot.forEach((doc) => {
             <div class="col-lg-3 col-md-6">
             <div class="item">
               <div class="thumb">
-                <a href="product-details.html"
-                  ><img src="${doc.data().image}" alt=""
-                /></a>
+                  <img src="${doc.data().image}" alt=""/>
               </div>
               <div class="down-content">
-                <span class="category">${doc.data().category}</span>
+                <span class="category">${doc.data().gerne1}</span>
                 <h4>${doc.data().name}</h4>
-                <a href="product-details.html"
-                  ><i class="fa fa-shopping-bag"></i
-                ></a>
+                <button onclick="openModal()"><i class="fa fa-shopping-bag"></i></button>
               </div>
             </div>
           </div>
@@ -61,11 +53,12 @@ loadCategoriesSnapshot.forEach((doc) => {
   categoriesGames.innerHTML += `
             <div class="col-lg col-sm-6 col-xs-12">
             <div class="item">
-              <h4>${doc.data().category}</h4>
+              <h4>${doc.data().gerne1}</h4>
               <div class="thumb">
-                <a href="product-details.html"
-                  ><img src="${doc.data().image}" alt=""
-                /></a>
+          
+                <button onclick="openModal()"><img src="${
+                  doc.data().image
+                }" alt=""/></button>
               </div>
             </div>
           </div>

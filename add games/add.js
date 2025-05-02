@@ -21,7 +21,7 @@ addBtn.addEventListener("click", async () => {
   const gerne2Value = gerne2.value;
   const gerne3Value = gerne3.value;
   const imageValue = image.value;
-  await addDoc(collection(db, "All games"), {
+  await addDoc(collection(db, "Categories"), {
     name: nameValue,
     price: priceValue,
     description: descriptionValue,
