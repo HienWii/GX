@@ -15,7 +15,7 @@ const loadTrendingSnapshot = await getDocs(collection(db, "Trending"));
 const loadMostPlayedSnapshot = await getDocs(collection(db, "Most Played"));
 const loadCategoriesSnapshot = await getDocs(collection(db, "Categories"));
 loadTrendingSnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data()}`);
+  console.log(`${doc.id}`);
   trendingGames.innerHTML += `
             <div class="col-lg-3 col-md-6">
             <div class="item">
@@ -28,14 +28,14 @@ loadTrendingSnapshot.forEach((doc) => {
               <div class="down-content">
                 <span class="category">${doc.data().gerne1}</span>
                 <h4>${doc.data().name}</h4>
-                <button class="buy-btn" onclick="openModal()"><i class="fa fa-shopping-bag"></i></button>
+                
               </div>
             </div>
           </div>
   `;
 });
 loadMostPlayedSnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data()}`);
+  console.log(`${doc.id}`);
   mostPlayedGames.innerHTML += `
             <div class="col-lg-3 col-md-6">
             <div class="item">
@@ -45,22 +45,27 @@ loadMostPlayedSnapshot.forEach((doc) => {
               <div class="down-content">
                 <span class="category">${doc.data().gerne1}</span>
                 <h4>${doc.data().name}</h4>
-                <button class="buy-btn" onclick="openModal()"><i class="fa fa-shopping-bag"></i></button>
+                
               </div>
             </div>
           </div>
   `;
+  const viewDetailBtns = document.querySelectorAll(".buy-btn");
+  viewDetailBtns.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const productId = e.currentTarget.getAttribute("data-id");
+      window.location.href = `product-details.html?id=${productId}`;
+    });
+  });
 });
 loadCategoriesSnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data()}`);
+  console.log(`${doc.id}`);
   categoriesGames.innerHTML += `
             <div class="col-lg col-sm-6 col-xs-12">
             <div class="item">
               <h4>${doc.data().gerne1}</h4>
               <div class="thumb">
-                <button onclick="openModal()"><img src="${
-                  doc.data().image
-                }" alt=""/></button>
+                <img src="${doc.data().image}" alt=""/>
               </div>
             </div>
           </div>

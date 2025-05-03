@@ -4,7 +4,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import { db } from "./config.js";
-
+import auth from "./config.js";
 // Get ID from URL
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -12,8 +12,6 @@ const productId = urlParams.get("id");
 
 if (productId) {
   loadProductDetails(productId);
-} else {
-  alert("No product ID provided in URL.");
 }
 
 async function loadProductDetails(id) {
@@ -56,11 +54,74 @@ async function loadProductDetails(id) {
   }
 }
 
-const userData = document.querySelector("#user-info");
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    userData.textContent = `${user.email} `;
-  } else {
-    window.location.href = "./login.html";
-  }
-});
+// const addToCartButton = document.querySelector(".add-to-cart");
+// const quantityInput = document.querySelector("#quantity");
+// const cartItemsList = document.querySelector("#cart-items");
+// const cartTotal = document.querySelector("#cart-total");
+
+// // Product details (you should dynamically fetch these from the page)
+// const productTitle = document.querySelector("h4").innerText; // Product title
+// const productPrice = parseFloat(
+//   document.querySelector(".price").innerText.replace("$", "")
+// ); // Product price
+// const productImage = document.querySelector(".left-image img").src; // Product image URL
+// // Function to update the cart UI
+// function updateCartUI() {
+//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
+//   cartItemsList.innerHTML = ""; // Clear existing cart items
+
+//   let total = 0;
+
+//   cart.forEach((item) => {
+//     const cartItem = document.createElement("li");
+//     cartItem.innerHTML = `${item.name} - $${item.price} x ${item.quantity}`;
+//     cartItemsList.appendChild(cartItem);
+
+//     total += item.price * item.quantity;
+//   });
+
+//   // Update the cart total
+//   cartTotal.innerText = `Total: $${total.toFixed(2)}`;
+// }
+
+// // Function to add product to cart
+// function addToCart() {
+//   const quantity = parseInt(quantityInput.value) || 1; // Get quantity, default to 1 if invalid
+//   const product = {
+//     name: productTitle,
+//     price: productPrice,
+//     image: productImage,
+//     quantity: quantity,
+//   };
+
+//   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+//   const existingProductIndex = cart.findIndex((item) => item.id === product.id);
+
+//   if (existingProductIndex !== -1) {
+//     // Update quantity if the product already exists in the cart
+//     cart[existingProductIndex].quantity += quantity;
+//   } else {
+//     // Add the new product to the cart
+//     cart.push(product);
+//   }
+
+//   // Save the updated cart to localStorage
+//   localStorage.setItem("cart", JSON.stringify(cart));
+//   console.log(localStorage.getItem("cart"));
+
+//   // Update the UI to reflect the cart changes
+//   updateCartUI();
+
+//   // Optionally, display a message to the user
+//   alert(`${product.name} has been added to your cart.`);
+// }
+
+// // Event listener for the "Add to Cart" button
+// addToCartButton.addEventListener("click", function (event) {
+//   event.preventDefault(); // Prevent the form from submitting
+//   addToCart(); // Call the add to cart function
+// });
+
+// // Initial call to update cart UI on page load
+// updateCartUI();
