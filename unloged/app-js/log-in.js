@@ -16,7 +16,7 @@ submitBtn.addEventListener("click", async (e) => {
       // Signed in
       alert("Sign up successful!");
       // Signed in
-      window.location.href = "./home-loged.html";
+      window.location.href = "./home-logged.html";
     })
     .catch((error) => {
       const errorCode = error.code;

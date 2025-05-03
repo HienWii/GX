@@ -16,7 +16,7 @@ submitBtn.addEventListener("click", (e) => {
     passwordError.textContent =
       "Password must be 8-15 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.";
     passwordError.style.color = "red";
-    passwordError.style.fontweight = "bold";
+    passwordError.style.fontWeight = "bold"; // 'W' should be uppercase
   } else {
     passwordError.textContent = "";
     createUserWithEmailAndPassword(auth, emailValue, passwordValue)
@@ -25,7 +25,7 @@ submitBtn.addEventListener("click", (e) => {
         const user = userCredential.user;
         // ...
         alert("Sign up successful!");
-        window.location.href = "./home-loged.html";
+        window.location.href = "./home-logged.html";
       })
       .catch((error) => {
         const errorCode = error.code;

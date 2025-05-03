@@ -2,6 +2,7 @@ import {
   doc,
   getDoc,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import { db } from "./config.js";
 
 // Get ID from URL
@@ -39,11 +40,27 @@ async function loadProductDetails(id) {
     document.querySelector(".col-lg-6.align-self-center p").textContent =
       product.description;
 
-    const genreLinks = document.querySelectorAll("li span + a");
-    if (genreLinks.length >= 3) {
-      genreLinks[0].textContent = product.gerne1 || "N/A";
-      genreLinks[1].textContent = product.gerne2 || "N/A";
-      genreLinks[2].textContent = product.gerne3 || "N/A";
+    const newLink = document.createElement("a");
+    newLink.href = "#";
+    newLink.textContent = "New Link Text"; // hoặc product.name nếu cần
+
+    const genreLi = document.querySelector(".gerne li");
+    if (genreLi) {
+      genreLi.innerHTML = `
+      <span>Genre:</span> 
+      <a>${product.gerne1 || "N/A"}</a> ,
+      <a>${product.gerne2 || "N/A"}</a> ,
+      <a>${product.gerne3 || "N/A"}</a>
+      `;
     }
   }
 }
+
+const userData = document.querySelector("#user-info");
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    userData.textContent = `${user.email} `;
+  } else {
+    window.location.href = "./login.html";
+  }
+});

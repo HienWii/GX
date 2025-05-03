@@ -3,7 +3,10 @@ import {
   addDoc,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 import { db } from "./config.js";
+import auth from "./config.js";
+// Show games data from Firebase Firestore
 
 const trendingGames = document.querySelector("#trending-container");
 const mostPlayedGames = document.querySelector("#most-played-container");
@@ -17,7 +20,7 @@ loadTrendingSnapshot.forEach((doc) => {
             <div class="col-lg-3 col-md-6">
             <div class="item">
               <div class="thumb">
-                  <img src="${doc.data().image}" alt=""</>
+                  <img src="${doc.data().image}" alt=""/>
                 <span class="price">
                 ${doc.data().price}
                 </span>
@@ -25,7 +28,7 @@ loadTrendingSnapshot.forEach((doc) => {
               <div class="down-content">
                 <span class="category">${doc.data().gerne1}</span>
                 <h4>${doc.data().name}</h4>
-                <button onclick="openModal()"><i class="fa fa-shopping-bag"></i></button>
+                <button class="buy-btn" onclick="openModal()"><i class="fa fa-shopping-bag"></i></button>
               </div>
             </div>
           </div>
@@ -42,7 +45,7 @@ loadMostPlayedSnapshot.forEach((doc) => {
               <div class="down-content">
                 <span class="category">${doc.data().gerne1}</span>
                 <h4>${doc.data().name}</h4>
-                <button onclick="openModal()"><i class="fa fa-shopping-bag"></i></button>
+                <button class="buy-btn" onclick="openModal()"><i class="fa fa-shopping-bag"></i></button>
               </div>
             </div>
           </div>
@@ -55,7 +58,6 @@ loadCategoriesSnapshot.forEach((doc) => {
             <div class="item">
               <h4>${doc.data().gerne1}</h4>
               <div class="thumb">
-          
                 <button onclick="openModal()"><img src="${
                   doc.data().image
                 }" alt=""/></button>
@@ -63,4 +65,14 @@ loadCategoriesSnapshot.forEach((doc) => {
             </div>
           </div>
   `;
+});
+
+// Show user data from Firebase Auth
+const userData = document.querySelector("#user-info");
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    userData.textContent = `${user.email} `;
+  } else {
+    window.location.href = "./login.html";
+  }
 });
