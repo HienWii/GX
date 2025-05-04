@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="assets/css/owl.css" />
   <link rel="stylesheet" href="assets/css/animate.css" />
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="./assets/css/cart.css">
 </head>
 
 <body>
@@ -43,7 +44,7 @@
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="home-unloged.html" class="logo">
+            <a href="home-logged.html" class="logo">
               <img src="assets/images/image.png" alt="" style="width: 158px" />
             </a>
             <!-- ***** Logo End ***** -->
@@ -53,11 +54,19 @@
               <li><a href="shop.html" class="active">Our Shop</a></li>
               <li><a href="contact.html">Contact Us</a></li>
               <li>
-                <div id="cart-container">
-                  <h4>Your Cart</h4>
-                  <ul id="cart-items"></ul>
-                  <p id="cart-total">Total: $0</p>
+                <div class="profile-container">
+                  <button class="profile-button" onclick="toggleDropdown()">
+                    <i class="bi bi-cart-fill"></i>
+                  </button>
+                  <div class="dropdown" id="profileDropdown">
+                    <div id="cart-container" onclick="toggleDropdown()">
+                      <h4>Your Cart</h4>
+                      <ul id="cart-items"></ul>
+                      <p id="cart-total"></p>
+                    </div>
+                  </div>
                 </div>
+                
               </li>
 
             </ul>
@@ -98,7 +107,7 @@
 
           </p>
           <form id="qty" action="#">
-            <input type="qty" class="form-control" id="1" aria-describedby="quantity" placeholder="1" />
+            <input class="quantity" />
             <button class="add-to-cart">
               <i class="fa fa-shopping-bag"></i> ADD TO CART
             </button>

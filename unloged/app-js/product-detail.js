@@ -54,74 +54,75 @@ async function loadProductDetails(id) {
   }
 }
 
-// const addToCartButton = document.querySelector(".add-to-cart");
-// const quantityInput = document.querySelector("#quantity");
-// const cartItemsList = document.querySelector("#cart-items");
-// const cartTotal = document.querySelector("#cart-total");
+const addToCartBtn = document.querySelector(".add-to-cart");
+const quantityInput = document.querySelector(".quantity");
 
-// // Product details (you should dynamically fetch these from the page)
-// const productTitle = document.querySelector("h4").innerText; // Product title
-// const productPrice = parseFloat(
-//   document.querySelector(".price").innerText.replace("$", "")
-// ); // Product price
-// const productImage = document.querySelector(".left-image img").src; // Product image URL
-// // Function to update the cart UI
-// function updateCartUI() {
-//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-//   cartItemsList.innerHTML = ""; // Clear existing cart items
+addToCartBtn.addEventListener("click", function (e) {
+  e.preventDefault();
 
-//   let total = 0;
+  const priceElement = document.querySelector(".price");
+  const productName = document.querySelector(
+    ".col-lg-6.align-self-center h4"
+  ).textContent;
+  const productImage = document.querySelector(".left-image img").src;
+  const productPriceText = priceElement.textContent.trim();
+  const quantity = parseInt(quantityInput.value) || 1;
 
-//   cart.forEach((item) => {
-//     const cartItem = document.createElement("li");
-//     cartItem.innerHTML = `${item.name} - $${item.price} x ${item.quantity}`;
-//     cartItemsList.appendChild(cartItem);
+  if (productPriceText === "$0") {
+    alert("This product is free. You can download it directly.");
+    // window.location.href = "download-link.html"; // nếu có
+  } else {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-//     total += item.price * item.quantity;
-//   });
+    cart.push({
+      name: productName,
+      image: productImage,
+      price: productPriceText,
+      quantity: quantity,
+    });
 
-//   // Update the cart total
-//   cartTotal.innerText = `Total: $${total.toFixed(2)}`;
-// }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Added to cart!");
+  }
+});
 
-// // Function to add product to cart
-// function addToCart() {
-//   const quantity = parseInt(quantityInput.value) || 1; // Get quantity, default to 1 if invalid
-//   const product = {
-//     name: productTitle,
-//     price: productPrice,
-//     image: productImage,
-//     quantity: quantity,
-//   };
+function renderCart() {
+  const cartItemsList = document.getElementById("cart-items");
+  const cartTotalElement = document.getElementById("#cart-total");
 
-//   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartItemsList.innerHTML = ""; // Xóa nội dung cũ
 
-//   const existingProductIndex = cart.findIndex((item) => item.id === product.id);
+  let total = 0;
 
-//   if (existingProductIndex !== -1) {
-//     // Update quantity if the product already exists in the cart
-//     cart[existingProductIndex].quantity += quantity;
-//   } else {
-//     // Add the new product to the cart
-//     cart.push(product);
-//   }
+  cart.forEach((item) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <img src="${item.image}" alt="${item.name}" style="width: 30px; height: 30px; object-fit: cover; margin-right: 5px;" />
+      <strong>${item.name}</strong> x${item.quantity} - ${item.price}
+    `;
+    cartItemsList.appendChild(li);
 
-//   // Save the updated cart to localStorage
-//   localStorage.setItem("cart", JSON.stringify(cart));
-//   console.log(localStorage.getItem("cart"));
+    // Tính tổng tiền (giá dạng chuỗi $XX, cần tách số)
+    const priceNumber = parseFloat(item.price.replace(/[^0-9.]/g, ""));
+    total += priceNumber * item.quantity;
+  });
 
-//   // Update the UI to reflect the cart changes
-//   updateCartUI();
+  cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+  window;
+}
 
-//   // Optionally, display a message to the user
-//   alert(`${product.name} has been added to your cart.`);
-// }
+// Gọi khi trang load
+window.addEventListener("load", renderCart);
 
-// // Event listener for the "Add to Cart" button
-// addToCartButton.addEventListener("click", function (event) {
-//   event.preventDefault(); // Prevent the form from submitting
-//   addToCart(); // Call the add to cart function
-// });
+function toggleDropdown() {
+  const dropdown = document.getElementById("cart-container");
+  dropdown.style.display =
+    dropdown.style.display === "block" ? "none" : "block";
+}
 
-// // Initial call to update cart UI on page load
-// updateCartUI();
+window.onclick = function (event) {
+  if (!event.target.closest(".profile-container")) {
+    document.getElementById("profileDropdown").style.display = "none";
+  }
+};

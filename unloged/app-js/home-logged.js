@@ -78,6 +78,19 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     userData.textContent = `${user.email} `;
   } else {
-    window.location.href = "./login.html";
+    window.location.href = "./log-in.html";
   }
 });
+
+function toggleDropdown() {
+  const dropdown = document.getElementById("profileDropdown");
+  dropdown.style.display =
+    dropdown.style.display === "block" ? "none" : "block";
+}
+
+window.onclick = function (event) {
+  if (!event.target.closest(".profile-container")) {
+    document.getElementById("profileDropdown").style.display = "none";
+  }
+};
+
